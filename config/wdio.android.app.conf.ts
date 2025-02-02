@@ -9,6 +9,10 @@ export const config: WebdriverIO.Config = {
     // ============
     specs: ["../tests/specs/**/app*.spec.ts"],
 
+    exclude: [
+        // Exclude this one because the test can only be executed on emulators/simulators
+        '../tests/specs/**/app.biometric.login.spec.js',
+    ],
     // ============
     // Capabilities
     // ============
@@ -41,15 +45,5 @@ export const config: WebdriverIO.Config = {
             "appium:appWaitActivity": "com.wdiodemoapp.MainActivity",
             "appium:newCommandTimeout": 240,
         },
-    ],   
-          
-    reporters: [
-        'spec',
-        ['allure', {
-            outputDir: './reports/local/android/',
-            disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false,
-        }]
-    ], 
-    
+    ],
 };
