@@ -57,7 +57,7 @@ exports.config = {
     },
     maxInstances: 1,
 >>>>>>> 4b9077b30418eb5fb8b13647ae4b1f00e8660284
-
+};
 // export const config: WebdriverIO.Config = {
 //     ...baseConfig,
 //     // ============
@@ -108,4 +108,4 @@ exports.config = {
 //             }
 //         },
 //     ] as WebdriverIO.Capabilities[]
-};
+
