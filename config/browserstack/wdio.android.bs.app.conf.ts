@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 import { config as baseConfig } from '../wdio.shared.conf.js';
-=======
+
 exports.config = {
       // ============
     // Specs
@@ -56,7 +55,6 @@ exports.config = {
       }
     },
     maxInstances: 1,
->>>>>>> 4b9077b30418eb5fb8b13647ae4b1f00e8660284
 };
 // export const config: WebdriverIO.Config = {
 //     ...baseConfig,
