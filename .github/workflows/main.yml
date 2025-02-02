@@ -1,12 +1,13 @@
 name: BrowserStack Android App Tests
 
 on:
-  workflow_dispatch:
+  
   push:
     branches:
       - main
   pull_request:
   pull_request_target:
+  workflow_dispatch:
 
 jobs:
   android-app:
