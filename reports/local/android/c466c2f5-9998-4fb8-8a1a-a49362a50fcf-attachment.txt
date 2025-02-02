@@ -1,0 +1,9 @@
+{
+  "script": "<script> [15 bytes]",
+  "args": [
+    {
+      "url": "wdio://webview",
+      "package": "com.wdiodemoapp"
+    }
+  ]
+}

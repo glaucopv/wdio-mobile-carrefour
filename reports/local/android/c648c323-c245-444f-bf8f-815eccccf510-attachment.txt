@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//*[@resource-id=\"__CAROUSEL_ITEM_1_READY__\"]"
+}

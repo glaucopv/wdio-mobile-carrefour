@@ -1,0 +1,3 @@
+{
+  "text": "ocr service for appium native apps"
+}

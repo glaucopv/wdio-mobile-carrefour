@@ -1,0 +1,9 @@
+{
+  "script": "<script> [15 bytes]",
+  "args": [
+    {
+      "url": "wdio://drag",
+      "package": "com.wdiodemoapp"
+    }
+  ]
+}

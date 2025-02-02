@@ -1,0 +1,5 @@
+{
+  "error": "no such element",
+  "message": "no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".DocSearch-HitsFooter\"}\n  (Session info: chrome=132.0.6834.123)",
+  "stacktrace": "\tGetHandleVerifier [0x00007FF6177D02F5+28725]\n\t(No symbol) [0x00007FF617732AE0]\n\t(No symbol) [0x00007FF6175C510A]\n\t(No symbol) [0x00007FF6176193D2]\n\t(No symbol) [0x00007FF6176195FC]\n\t(No symbol) [0x00007FF617663407]\n\t(No symbol) [0x00007FF61763FFEF]\n\t(No symbol) [0x00007FF617660181]\n\t(No symbol) [0x00007FF61763FD53]\n\t(No symbol) [0x00007FF61760A0E3]\n\t(No symbol) [0x00007FF61760B471]\n\tGetHandleVerifier [0x00007FF617AFF30D+3366989]\n\tGetHandleVerifier [0x00007FF617B112F0+3440688]\n\tGetHandleVerifier [0x00007FF617B078FD+3401277]\n\tGetHandleVerifier [0x00007FF61789AAAB+858091]\n\t(No symbol) [0x00007FF61773E74F]\n\t(No symbol) [0x00007FF61773A304]\n\t(No symbol) [0x00007FF61773A49D]\n\t(No symbol) [0x00007FF617728B69]\n\tBaseThreadInitThunk [0x00007FFF7A127374+20]\n\tRtlUserThreadStart [0x00007FFF7BD3CC91+33]\n"
+}
