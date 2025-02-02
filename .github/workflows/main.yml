@@ -52,6 +52,22 @@ jobs:
             mkdir -p apps
             wget https://github.com/webdriverio/native-demo-app/releases/download/v1.0.8/android.wdio.native.app.v1.0.8.apk -P apps
 
+      - name: Definir credenciais do BrowserStack
+        env:
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: echo "Credenciais do BrowserStack configuradas"
+
+      - name: Executar testes WebdriverIO no BrowserStack
+        run: npm run android.browserstack.app
+
+      - name: Upload de Relatórios Allure (Opcional)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: /reports/local/android/
+      
       # - name: 📬 Upload App to Sauce Labs
       #   if: steps.check-deps.outputs.skip != 'true'
       #   run: |
