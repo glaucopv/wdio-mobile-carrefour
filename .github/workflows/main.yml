@@ -1,57 +1,28 @@
-name: BrowserStack Android App Tests
+name: Run WebdriverIO Tests on BrowserStack
 
 on:
-  
   push:
     branches:
-      - main
+      - main  # Você pode mudar para outra branch, como "develop"
   pull_request:
-  pull_request_target:
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  android-app:
+  test:
     runs-on: ubuntu-latest
-    # Src: https://hugo.alliau.me/posts/2021-05-04-migration-to-github-native-dependabot-solutions-for-auto-merge-and-action-secrets.html#share-your-secrets-with-dependabot
-    # If the PR is coming from a fork (pull_request_target), ensure it's opened by "dependabot[bot]".
-    # Otherwise, clone it normally.
-    if: |
-        github.event_name == 'pull_request' ||
-        (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]')
+
     steps:
-      - name: ⬇️ Checkout Repository
-        if: ${{ github.event_name != 'pull_request_target' }}
-        uses: actions/checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v3
 
-      - name: ⬇️ Checkout PR Repository
-        if: ${{ github.event_name == 'pull_request_target' }}
-        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
         with:
-            ref: ${{ github.event.pull_request.head.sha }}
+          node-version: 18
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-            node-version-file: '.nvmrc'
-
-      - name: 🧩 Install Dependencies
-        run: |
-          npm ci
-
-      - name: Check for excluded dependencies
-        id: check-deps
-        if: github.actor == 'dependabot[bot]'
-        run: |
-            if echo "${{ github.event.pull_request.title }}" | grep -Eq "appium|appium-uiautomator2-driver|appium-xcuitest-driver"; then
-              echo "Skipping tests due to dependency update"
-              echo "::set-output name=skip::true"
-            fi
-
-      - name: 📦 Download app
-        if: steps.check-deps.outputs.skip != 'true'
-        run: |
-            mkdir -p apps
-            wget https://github.com/webdriverio/native-demo-app/releases/download/v1.0.8/android.wdio.native.app.v1.0.8.apk -P apps
+      - name: Instalar dependências
+        run: npm install
 
       - name: Definir credenciais do BrowserStack
         env:
@@ -60,46 +31,12 @@ jobs:
         run: echo "Credenciais do BrowserStack configuradas"
 
       - name: Executar testes WebdriverIO no BrowserStack
-        run: npm run android.browserstack.app
+        run: npx wdio wdio.browserstack.conf.js
 
       - name: Upload de Relatórios Allure (Opcional)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: allure-results
-          path: /reports/local/android/
-      
-      # - name: 📬 Upload App to Sauce Labs
-      #   if: steps.check-deps.outputs.skip != 'true'
-      #   run: |
-      #       curl -v \
-      #           -F "payload=@./apps/android.wdio.native.app.v1.0.8.apk" \
-      #           -F name=wdio-demo-app-android.apk \
-      #           -u "${{ secrets.SAUCE_USERNAME }}:${{ secrets.SAUCE_ACCESS_KEY }}" \
-      #           'https://api.eu-central-1.saucelabs.com/v1/storage/upload'
+          path: allure-results
 
-      
-
-    # Not needed now we are running on Sauce Labs
-    #   - name: 💾 Save server output
-    #     if: failure()
-    #     uses: actions/upload-artifact@v4
-    #     with:
-    #         name: android-runner-output
-    #         path: |
-    #             logs/
-      - name: Definir credenciais do BrowserStack
-        env:
-          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-        run: echo "Credenciais do BrowserStack configuradas"
-
-      - name: Executar testes WebdriverIO no BrowserStack
-        run: npm run android.browserstack.app
-
-      - name: Upload de Relatórios Allure (Opcional)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: /reports/local/android/
