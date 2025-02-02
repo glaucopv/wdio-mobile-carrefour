@@ -32,7 +32,7 @@ jobs:
         run: echo "Credenciais do BrowserStack configuradas"
 
       - name: Executar testes WebdriverIO no BrowserStack
-        run: npx wdio wdio.browserstack.conf.js
+        run: android.browserstack.app
 
       - name: Upload de Relatórios Allure (Opcional)
         if: always()
