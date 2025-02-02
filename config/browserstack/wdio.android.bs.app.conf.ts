@@ -1,4 +1,15 @@
 exports.config = {
+      // ============
+    // Specs
+    // ============
+    specs: [
+        '../tests/specs/**/app*.spec.js',
+    ],
+    exclude: [
+        // Exclude this one because the test can only be executed on emulators/simulators
+        '../tests/specs/**/app.biometric.login.spec.js',
+    ],
+    
     user: process.env.BROWSERSTACK_USERNAME || 'glaucovieira_A3xY1S',
     key: process.env.BROWSERSTACK_ACCESS_KEY || 'WwBRTwwzUqashT3srBEx',
     hostname: 'hub.browserstack.com',
